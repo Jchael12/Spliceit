@@ -1,0 +1,131 @@
+@import "tailwindcss";
+@import "@plop-ui/fonts/fonts.css";
+@import "@plop-ui/react/styles.css";
+
+:root {
+  --app-max: 1180px;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--plop-font-body);
+  background: #eee7d6;
+}
+
+@supports (min-height: 100dvh) {
+  html,
+  body,
+  #root {
+    min-height: 100dvh;
+  }
+}
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--plop-focus);
+  outline-offset: 3px;
+}
+
+/* Sheet's default padding is generous. This keeps small stat cards compact. */
+.sheet-compact {
+  padding: 20px !important;
+}
+
+@media (max-width: 560px) {
+  .sheet-compact {
+    padding: 16px !important;
+  }
+}
+
+.soft {
+  color: var(--plop-on-soft);
+}
+
+.border-ink {
+  border-color: var(--plop-ink);
+}
+
+.ink {
+  color: var(--plop-on);
+}
+
+.paper-ink {
+  color: var(--plop-ink-text);
+}
+
+.paper-soft {
+  color: var(--plop-ink-soft);
+}
+
+/* Small hand-drawn numeric inputs used inside participant split rows. */
+.field-input {
+  width: 100%;
+  min-height: 42px;
+  padding: 7px 11px;
+  border: 2.5px solid var(--plop-ink);
+  border-radius: var(--plop-radius-box);
+  background: var(--plop-paper);
+  color: var(--plop-ink-text);
+  font: inherit;
+  font-size: var(--plop-text-md);
+  line-height: 1.2;
+  box-shadow: 2px 3px 0 var(--plop-shadow);
+}
+
+.field-input::placeholder {
+  color: var(--plop-placeholder);
+}
+
+.field-input:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--plop-focus) 25%, transparent),
+    2px 3px 0 var(--plop-shadow);
+}
+
+.field-input[aria-invalid="true"] {
+  border-color: var(--plop-tomato);
+}
+
+/* Native date inputs sit a little high in some browsers. */
+.field-input[type="date"] {
+  min-height: 46px;
+}
+
+/* Keep the mobile bottom bar clear of content and iPhone home indicator. */
+.page-bottom-space {
+  padding-bottom: calc(102px + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 1024px) {
+  .page-bottom-space {
+    padding-bottom: 48px;
+  }
+}
+
+/* A little paper grain on the app shell divider. */
+.sidebar-rule {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--plop-ink) 0 6px,
+    transparent 6px 12px
+  );
+  opacity: 0.2;
+}
+
+/* Hide number input spinners so totals stay tidy. */
+.no-spin::-webkit-outer-spin-button,
+.no-spin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spin {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
