@@ -26,7 +26,7 @@ const CURRENCIES = [
   { value: "USD", label: "USD - US dollar" },
   { value: "EUR", label: "EUR - Euro" },
   { value: "GBP", label: "GBP - British pound" },
-  { value: "CAD", label: "CAD - Canadian dollar" },
+  { value: "PHP", label: "PHP - Philippine Peso" },
   { value: "AUD", label: "AUD - Australian dollar" },
 ];
 
