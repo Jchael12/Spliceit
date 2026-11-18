@@ -21,7 +21,7 @@ export default function Logo({ compact = false }) {
         <ReceiptText size={compact ? 20 : 23} strokeWidth={2.3} />
       </span>
       <span
-        className="paper-ink leading-none"
+        className="chrome-ink leading-none"
         style={{
           fontFamily: "var(--plop-font-logo)",
           fontWeight: 900,
@@ -31,7 +31,7 @@ export default function Logo({ compact = false }) {
         }}
       >
         Spli
-        <span style={{ color: "var(--plop-tomato)" }}>ceit</span>
+        <span style={{ color: "var(--app-logo-accent)" }}>ceit</span>
       </span>
     </Link>
   );

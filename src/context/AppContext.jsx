@@ -19,11 +19,24 @@ import { formatMoney } from "../lib/format";
 
 const AppContext = createContext(null);
 
+const THEME_KEY = "splitink.theme";
+const THEMES = new Set(["light", "dark", "system"]);
+
+const readStoredTheme = () => {
+  try {
+    const stored = window.localStorage.getItem(THEME_KEY);
+    return THEMES.has(stored) ? stored : "system";
+  } catch {
+    return "system";
+  }
+};
+
 const makeId = (prefix) =>
   `${prefix}${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}`;
 
 export function AppProvider({ children }) {
   const [users] = useState(seedUsers);
+  const [theme, setThemeState] = useState(readStoredTheme);
   const [groups, setGroups] = useState(seedGroups);
   const [expenses, setExpenses] = useState(seedExpenses);
   const [settlements, setSettlements] = useState(seedSettlements);
@@ -341,9 +354,21 @@ export function AppProvider({ children }) {
     setProfile((previous) => ({ ...previous, ...updates }));
   }, []);
 
+  const setTheme = useCallback((nextTheme) => {
+    const next = THEMES.has(nextTheme) ? nextTheme : "system";
+    setThemeState(next);
+    try {
+      window.localStorage.setItem(THEME_KEY, next);
+    } catch {
+      // Theme still applies for this session when storage is unavailable.
+    }
+  }, []);
+
   const value = useMemo(
     () => ({
       users,
+      theme,
+      setTheme,
       groups,
       groupsForUser,
       expenses,
@@ -390,7 +415,9 @@ export function AppProvider({ children }) {
       profile,
       recordSettlement,
       respondToInvitation,
+      setTheme,
       settlements,
+      theme,
       unreadCount,
       updateExpense,
       updateProfile,

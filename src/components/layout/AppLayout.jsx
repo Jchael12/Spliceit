@@ -43,7 +43,7 @@ function NavItem({ item, unreadCount, onNavigate }) {
           "flex items-center gap-3 rounded-[13px] border-[2.5px] px-3 py-2.5 text-[15px] font-bold no-underline transition-colors",
           isActive
             ? "border-ink bg-[var(--plop-mustard)] paper-ink shadow-[3px_4px_0_var(--plop-shadow)]"
-            : "border-transparent ink hover:bg-[rgba(246,196,69,0.18)]",
+            : "border-transparent chrome-ink chrome-hover",
         ].join(" ")
       }
     >
@@ -82,7 +82,7 @@ export default function AppLayout() {
 
   return (
     <div className="min-h-screen">
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r-[2.5px] border-ink bg-[var(--plop-sheet)] px-4 py-5 lg:flex xl:w-72">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r-[2.5px] border-chrome bg-[var(--app-chrome)] px-4 py-5 lg:flex xl:w-72">
         <div className="px-1">
           <Logo />
         </div>
@@ -109,19 +109,19 @@ export default function AppLayout() {
           <button
             type="button"
             onClick={() => setHelpOpen(true)}
-            className="mb-3 flex w-full items-center gap-3 rounded-[13px] border-[2.5px] border-dashed border-[var(--plop-periwinkle)] bg-[rgba(255,255,255,0.28)] px-3 py-2.5 text-left text-[14px] font-bold paper-ink transition-transform hover:-translate-y-0.5"
+            className="chrome-tint mb-3 flex w-full items-center gap-3 rounded-[13px] border-[2.5px] border-dashed border-[var(--plop-periwinkle)] px-3 py-2.5 text-left text-[14px] font-bold chrome-ink transition-transform hover:-translate-y-0.5"
           >
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[9px] border-2 border-ink bg-[var(--plop-mustard)]">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[9px] border-2 border-ink bg-[var(--plop-mustard)] paper-ink">
               <HelpCircle size={18} strokeWidth={2.4} aria-hidden="true" />
             </span>
             <span className="min-w-0 flex-1">
               Help &amp; guide
-              <span className="paper-soft block text-[11px] font-bold">
+              <span className="chrome-soft block text-[11px] font-bold">
                 New here? Take the tour.
               </span>
             </span>
           </button>
-          <p className="paper-soft mb-3 px-2 text-[12px] leading-snug">
+          <p className="chrome-soft mb-3 px-2 text-[12px] leading-snug">
             Split bills, keep friends. Every number adds up.
           </p>
           <NavLink
@@ -142,7 +142,7 @@ export default function AppLayout() {
       </aside>
 
       <div className="lg:pl-64 xl:pl-72">
-        <header className="sticky top-0 z-30 flex items-center justify-between border-b-[2.5px] border-ink bg-[var(--plop-sheet)] px-4 py-2.5 lg:hidden">
+        <header className="sticky top-0 z-30 flex items-center justify-between border-b-[2.5px] border-chrome bg-[var(--app-chrome)] px-4 py-2.5 lg:hidden">
           <Logo compact />
           <div className="flex items-center gap-2">
             <NavLink
@@ -183,7 +183,7 @@ export default function AppLayout() {
       </div>
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-40 border-t-[2.5px] border-ink bg-[var(--plop-sheet)] px-2 pb-[env(safe-area-inset-bottom)] lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 border-t-[2.5px] border-chrome bg-[var(--app-chrome)] px-2 pb-[env(safe-area-inset-bottom)] lg:hidden"
         aria-label="Mobile navigation"
       >
         <div className="mx-auto flex max-w-md items-center justify-between gap-1 py-1.5">
@@ -222,8 +222,8 @@ function MobileNavItem({ item }) {
         [
           "flex min-w-[58px] flex-col items-center gap-0.5 rounded-[10px] px-2 py-1.5 text-[10px] font-bold no-underline",
           isActive
-            ? "paper-ink bg-[rgba(246,196,69,0.42)]"
-            : "soft hover:bg-[rgba(246,196,69,0.18)]",
+            ? "paper-ink bg-[var(--plop-mustard)]"
+            : "chrome-soft chrome-hover",
         ].join(" ")
       }
     >

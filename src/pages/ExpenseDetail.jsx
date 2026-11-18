@@ -389,9 +389,9 @@ export default function ExpenseDetail() {
                 : "Percentage splits turn each person's share into a slice of the bill. The percentages should add up to 100%."}
           </Callout>
 
-          <div className="paper-ink rounded-[14px] border-2 border-dashed border-[var(--plop-periwinkle)] p-4 text-[13px]">
+          <div className="ink rounded-[14px] border-2 border-dashed border-[var(--plop-periwinkle)] p-4 text-[13px]">
             <p className="m-0 font-bold">Expense details</p>
-            <div className="paper-soft mt-2 grid gap-1">
+            <div className="soft mt-2 grid gap-1">
               <span>Created {formatDateTime(expense.createdAt)}</span>
               <span>Expense ID: {expense.id}</span>
               <span>Category: {expense.category}</span>

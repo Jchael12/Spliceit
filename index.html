@@ -3,12 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#EEE7D6" />
+    <meta id="theme-color" name="theme-color" content="#EEE7D6" />
     <meta
       name="description"
       content="Spleciet - a friendly, hand-drawn bill splitting app for groups."
     />
     <title>Spliciet - Split bills, keep friends</title>
+    <script>
+      // Apply a saved theme before first paint so dark mode does not flash light.
+      (() => {
+        try {
+          const stored = localStorage.getItem("splitink.theme");
+          if (stored === "light" || stored === "dark") {
+            document.documentElement.dataset.plopTheme = stored;
+          }
+        } catch {
+          // Storage can be unavailable; the in-app preference still works.
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

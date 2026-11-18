@@ -29,17 +29,37 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  const { profile } = useApp();
+  const { profile, theme } = useApp();
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.plopSurface = profile.surface;
+    if (theme === "system") {
+      delete root.dataset.plopTheme;
+    } else {
+      root.dataset.plopTheme = theme;
+    }
+
+    // Keep native controls and the mobile browser bar in step with the theme.
+    root.style.colorScheme = theme === "system" ? "light dark" : theme;
+    const themeColor = document.getElementById("theme-color");
+    if (themeColor) {
+      themeColor.setAttribute(
+        "content",
+        getComputedStyle(document.body).backgroundColor,
+      );
+    }
+  }, [profile.surface, theme]);
 
   return (
     <div
       data-plop-surface={profile.surface}
-      data-plop-theme="light"
+      data-plop-theme={theme === "system" ? undefined : theme}
       className="plop-surface min-h-screen"
     >
       <PlopProvider
         paint={false}
-        theme="light"
+        theme={theme}
         stickerShadow="soft"
         roundness={1}
       >

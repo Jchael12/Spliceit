@@ -4,6 +4,31 @@
 
 :root {
   --app-max: 1180px;
+  /* Navigation chrome is the only part that turns dark with the theme.
+     Cards and sheets keep PlopUI's "printed on paper" look. */
+  --app-chrome: var(--plop-sheet);
+  --app-chrome-on: var(--plop-ink-text);
+  --app-chrome-soft: var(--plop-ink-soft);
+  --app-chrome-tint: rgba(246, 196, 69, 0.18);
+  --app-logo-accent: var(--plop-tomato);
+}
+
+[data-plop-theme="dark"] {
+  --app-chrome: color-mix(in srgb, var(--plop-bg) 86%, black);
+  --app-chrome-on: var(--plop-on);
+  --app-chrome-soft: var(--plop-on-soft);
+  --app-chrome-tint: color-mix(in srgb, var(--plop-on) 10%, transparent);
+  --app-logo-accent: #f58a70;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-plop-theme="light"]) {
+    --app-chrome: color-mix(in srgb, var(--plop-bg) 86%, black);
+    --app-chrome-on: var(--plop-on);
+    --app-chrome-soft: var(--plop-on-soft);
+    --app-chrome-tint: color-mix(in srgb, var(--plop-on) 10%, transparent);
+    --app-logo-accent: #f58a70;
+  }
 }
 
 html,
@@ -12,10 +37,15 @@ body,
   min-height: 100%;
 }
 
+html {
+  background: var(--plop-bg);
+}
+
 body {
   margin: 0;
   font-family: var(--plop-font-body);
-  background: #eee7d6;
+  background: var(--plop-bg);
+  color: var(--plop-on);
 }
 
 @supports (min-height: 100dvh) {
@@ -42,6 +72,10 @@ body {
   }
 }
 
+/* Contrast contract:
+   - `.ink` / `.soft`  → text on the themed app surface (changes with theme).
+   - `.paper-ink` / `.paper-soft` → text on PlopUI paper/sheets (always light).
+   - `.chrome-*` → sidebar, header and mobile bar text and fills. */
 .soft {
   color: var(--plop-on-soft);
 }
@@ -60,6 +94,31 @@ body {
 
 .paper-soft {
   color: var(--plop-ink-soft);
+}
+
+/* Text and fills that belong to the app chrome (sidebar, headers, mobile bar). */
+.chrome-ink {
+  color: var(--app-chrome-on);
+}
+
+.chrome-soft {
+  color: var(--app-chrome-soft);
+}
+
+.chrome-tint {
+  background: var(--app-chrome-tint);
+}
+
+.chrome-hover:hover {
+  background: var(--app-chrome-tint);
+}
+
+.chrome-active {
+  background: var(--app-chrome-active);
+}
+
+.border-chrome {
+  border-color: var(--app-chrome-on);
 }
 
 /* Small hand-drawn numeric inputs used inside participant split rows. */

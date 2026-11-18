@@ -3,8 +3,11 @@ import {
   Bell,
   Check,
   Info,
+  Monitor,
+  Moon,
   Palette,
   Save,
+  Sun,
   UserRound,
 } from "lucide-react";
 import {
@@ -30,6 +33,12 @@ const CURRENCIES = [
   { value: "AUD", label: "AUD - Australian dollar" },
 ];
 
+const THEMES = [
+  { value: "light", label: "Light", icon: Sun },
+  { value: "dark", label: "Dark", icon: Moon },
+  { value: "system", label: "System", icon: Monitor },
+];
+
 const SURFACES = [
   { value: "poster", label: "Poster", swatch: "#EEE7D6" },
   { value: "mat", label: "Cutting mat", swatch: "#CFE3D2" },
@@ -50,6 +59,8 @@ export default function Settings() {
     groupsForUser,
     expenses,
     notifications,
+    theme,
+    setTheme,
   } = useApp();
   const [form, setForm] = useState({
     name: profile.name,
@@ -218,6 +229,38 @@ export default function Settings() {
               })}
             </div>
 
+            <div className="mt-5 border-t-2 border-dashed border-[var(--plop-periwinkle)] pt-4">
+              <p className="paper-ink text-[13px] font-bold">Theme</p>
+              <p className="paper-soft mt-0.5 text-[12px] leading-snug">
+                Applies right away and is remembered on this device.
+              </p>
+              <div
+                className="mt-2 grid grid-cols-3 gap-2"
+                role="group"
+                aria-label="Color theme"
+              >
+                {THEMES.map(({ value, label, icon: Icon }) => {
+                  const selected = theme === value;
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setTheme(value)}
+                      aria-pressed={selected}
+                      className={[
+                        "flex items-center justify-center gap-1.5 rounded-[10px] border-[2.5px] px-2 py-2 text-[12px] font-bold transition-transform",
+                        selected
+                          ? "border-ink paper-ink shadow-[2px_3px_0_var(--plop-shadow)]"
+                          : "border-transparent paper-soft hover:-translate-y-0.5",
+                      ].join(" ")}
+                    >
+                      <Icon size={15} strokeWidth={2.4} aria-hidden="true" />
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </Sheet>
         </div>
 
